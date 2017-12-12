@@ -70,11 +70,17 @@ class Zone:
         assert zone.contains(position)
         return zone
 
+    def average_agreeableness(self):
+    	if not self.inhabitants:
+    		return 0
+    	else:
+    		return sum([inhabitant.agreeableness for inhabitant in self.inhabitants]) / self.population
+    	
     @property
     def width(self):
     	return abs((self.corner1.longitude-self.corner2.longitude) * self.EARTH_RADIUS_KILOMETERS)
 
-   	@property
+    @property
     def height(self):
     	return abs((self.corner1.latitude-self.corner2.latitude) * self.EARTH_RADIUS_KILOMETERS)
     
@@ -102,6 +108,6 @@ def main():
 		agent = Agent(position, **agent_attributes)
 		zone = Zone.find_zone_that_contains(position)
 		zone.add_inhabitant(agent)
-		print(zone.population)
+		print(zone.average_agreeableness())
 		
 main()
