@@ -35,6 +35,7 @@ class Zone:
     MAX_LATITUDE_DEGREES = 90
     WIDTH_DEGREES = 1 # degrees of longitude
     HEIGHT_DEGREES = 1 # degrees of latitude
+    EARTH_RADIUS_KILOMETERS = 6371
 
     def __init__(self, corner1, corner2):
         self.corner1 = corner1
@@ -67,8 +68,20 @@ class Zone:
         # Just checking that the index is correct
         zone = cls.ZONES[zone_index]
         assert zone.contains(position)
-
         return zone
+
+    @property
+    def width(self):
+    	return abs((self.corner1.longitude-self.corner2.longitude) * self.EARTH_RADIUS_KILOMETERS)
+
+   	@property
+    def height(self):
+    	return abs((self.corner1.latitude-self.corner2.latitude) * self.EARTH_RADIUS_KILOMETERS)
+    
+    @property
+    def area(self):
+    	return self.width * self.height
+
 
     @classmethod
     def _initialize_zones(cls):
