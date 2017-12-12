@@ -88,6 +88,6 @@ def main():
 		Zone.initialize_zones()
 		zone = Zone.find_zone_that_contains(position)
 		zone.add_inhabitant(agent)
+		print(zone.population)
 		
-	print("fin")
 main()
