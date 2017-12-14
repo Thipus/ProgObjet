@@ -1,5 +1,9 @@
 import json
 import math
+
+import matplotlib as mil
+mil.use('TkAgg')
+import matplotlib.pyplot as plt
 import time
 
 class Agent:
@@ -100,6 +104,18 @@ class Zone:
                 zone = Zone(bottom_left_corner, top_right_corner)
                 cls.ZONES.append(zone)
 
+class BaseGraph:
+
+	def __init__(self):
+		self.title = "Your graph title"
+		self.x_label = "X-axis label"
+		self.y_label = "Y-axis label"
+		self.grid = True
+
+
+
+
+
 def main():
 	for agent_attributes in json.load(open("agents-100k.json")):
 		latitude = agent_attributes.pop('latitude')
@@ -109,5 +125,11 @@ def main():
 		zone = Zone.find_zone_that_contains(position)
 		zone.add_inhabitant(agent)
 		print(zone.average_agreeableness())
+
+	# initialisation du graphique
+	#agreeableness_graph = AgreeablenessGraph()
+
+	# affichage du graphique
+	#agreeableness_graph.show(Zone.ZONES)
 		
 main()
